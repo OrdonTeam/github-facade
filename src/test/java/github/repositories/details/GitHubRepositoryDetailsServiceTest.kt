@@ -12,16 +12,16 @@ class GitHubRepositoryDetailsServiceTest {
 
     val api = mock<GitHubRepositoryDetailsApi>()
     val service = GitHubRepositoryDetailsService(api)
-    val expected = GitHubRepositoryDetails("OrdonTeam/ogame-api")
+    val apiResponse = newGitHubRepositoryDetails()
 
     @Before
     fun setUp() {
-        whenever(api.getRepositoryDetails(any(), any())).thenReturn(expected)
+        whenever(api.getRepositoryDetails(any(), any())).thenReturn(apiResponse)
     }
 
     @Test
     fun shouldReturnRepositoryDetails() {
-        Assert.assertEquals(expected, executeService())
+        Assert.assertEquals(apiResponse, executeService())
     }
 
     @Test
