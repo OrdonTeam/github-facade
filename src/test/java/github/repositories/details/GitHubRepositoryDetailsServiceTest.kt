@@ -12,11 +12,11 @@ class GitHubRepositoryDetailsServiceTest {
 
     val api = mock<GitHubRepositoryDetailsApi>()
     val service = GitHubRepositoryDetailsService(api)
-    val expected = GitHubRepositoryDetails("OrdonTeam")
+    val expected = GitHubRepositoryDetails("OrdonTeam/ogame-api")
 
     @Before
     fun setUp() {
-        whenever(api.getRepositoryDetails(any())).thenReturn(expected)
+        whenever(api.getRepositoryDetails(any(), any())).thenReturn(expected)
     }
 
     @Test
@@ -25,13 +25,13 @@ class GitHubRepositoryDetailsServiceTest {
     }
 
     @Test
-    fun shouldUseOwnerParameterInApiCall() {
+    fun shouldUseOwnerAndRepositoryNameParametersInApiCall() {
         executeService()
 
-        verify(api).getRepositoryDetails("OrdonTeam")
+        verify(api).getRepositoryDetails("OrdonTeam", "ogame-api")
     }
 
     private fun executeService(): GitHubRepositoryDetails {
-        return service.getRepositoryDetails("OrdonTeam")
+        return service.getRepositoryDetails("OrdonTeam", "ogame-api")
     }
 }
