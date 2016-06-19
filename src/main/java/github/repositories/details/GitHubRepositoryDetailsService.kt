@@ -1,6 +1,8 @@
 package github.repositories.details
 
-class GitHubRepositoryDetailsService {
+class GitHubRepositoryDetailsService(val api: GitHubRepositoryDetailsApi) {
 
-    fun getRepositoryDetails() = GitHubRepositoryDetails("Full name")
+    fun getRepositoryDetails(owner: String): GitHubRepositoryDetails {
+        return api.getRepositoryDetails(owner)
+    }
 }
