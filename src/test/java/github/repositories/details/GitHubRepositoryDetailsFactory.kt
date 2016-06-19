@@ -1,6 +1,6 @@
 package github.repositories.details
 
-fun newGitHubRepositoryDetails(fullName: String = "OrdonTeam/ogamie-api",
+fun newGitHubRepositoryDetails(fullName: String = "OrdonTeam/ogame-api",
                                description: String = "",
                                cloneUrl: String = "https://github.com/OrdonTeam/ogame-api.git",
                                stars: Int = 0,
