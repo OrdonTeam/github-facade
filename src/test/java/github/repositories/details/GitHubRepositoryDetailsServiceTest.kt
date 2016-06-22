@@ -12,7 +12,7 @@ class GitHubRepositoryDetailsServiceTest {
 
     val api = mock<GitHubRepositoryDetailsApi>()
     val converter = mock<DateFormatConverter>()
-    val service = GitHubRepositoryDetailsService(api, converter)
+    val service = GitHubRepositoryDetailsServiceImpl(api, converter)
     val apiResponse = newGitHubRepositoryDetails()
 
     @Before
