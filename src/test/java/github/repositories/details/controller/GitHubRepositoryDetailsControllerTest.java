@@ -1,9 +1,12 @@
 package github.repositories.details.controller;
 
+import github.repositories.details.GitHubRepositoryDetailsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
@@ -40,5 +43,9 @@ public class GitHubRepositoryDetailsControllerTest {
     @ComponentScan
     public static class TestConfiguration {
 
+        @Bean
+        public GitHubRepositoryDetailsService gitHubRepositoryDetailsService() {
+            return Mockito.mock(GitHubRepositoryDetailsService.class);
+        }
     }
 }
