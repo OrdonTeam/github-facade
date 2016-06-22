@@ -12,7 +12,8 @@ class GitHubRepositoryDetailsController @Autowired constructor(val service: GitH
     @RequestMapping(value = "/repositories/{owner}/{repositoryName}", method = arrayOf(RequestMethod.GET))
     fun repositoryDetails(
             @PathVariable("owner") owner: String,
-            @PathVariable("repositoryName") repositoryName: String): GitHubRepositoryDetails {
-        return service.getRepositoryDetails(owner, repositoryName, Locale.US)
+            @PathVariable("repositoryName") repositoryName: String,
+            locale: Locale): GitHubRepositoryDetails {
+        return service.getRepositoryDetails(owner, repositoryName, locale)
     }
 }
