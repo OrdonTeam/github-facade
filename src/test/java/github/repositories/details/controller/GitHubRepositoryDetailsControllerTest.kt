@@ -22,6 +22,7 @@ import org.springframework.web.context.WebApplicationContext
 
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import java.util.*
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @WebAppConfiguration
@@ -43,7 +44,7 @@ class GitHubRepositoryDetailsControllerTest {
     fun shouldRunEndpoint() {
         whenever(service.getRepositoryDetails(any(), any(), any())).thenReturn(newGitHubRepositoryDetails())
         mockMvc.perform(get("/repositories/OrdonTeam/ogame-api")).andExpect(status().isOk)
-        verify(service).getRepositoryDetails("OrdonTeam", "ogame-api", "")
+        verify(service).getRepositoryDetails("OrdonTeam", "ogame-api", Locale.US)
     }
 
     @Configuration

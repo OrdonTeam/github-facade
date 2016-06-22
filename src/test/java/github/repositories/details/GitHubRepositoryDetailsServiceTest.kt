@@ -7,6 +7,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.util.*
 
 class GitHubRepositoryDetailsServiceTest {
 
@@ -32,7 +33,7 @@ class GitHubRepositoryDetailsServiceTest {
     fun shouldConvertDate() {
         executeService()
 
-        verify(converter).changeDateFormat("2016-05-03T21:12:50Z", "yyyy-MM-dd")
+        verify(converter).changeDateFormat("2016-05-03T21:12:50Z", Locale.US)
     }
 
     @Test
@@ -41,6 +42,6 @@ class GitHubRepositoryDetailsServiceTest {
     }
 
     private fun executeService(): GitHubRepositoryDetails {
-        return service.getRepositoryDetails("OrdonTeam", "ogame-api", "yyyy-MM-dd")
+        return service.getRepositoryDetails("OrdonTeam", "ogame-api", Locale.US)
     }
 }

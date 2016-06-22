@@ -2,6 +2,7 @@ package github.repositories.details.converter
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.util.*
 
 class GitHubApiDateFormatConverterTest {
 
@@ -9,10 +10,15 @@ class GitHubApiDateFormatConverterTest {
 
     @Test
     fun shouldConvertFromGitHubFormat() {
-        verifyConversion("2016-05-03T21:12:50Z", "yyyy-MM-dd", "2016-05-03")
+        verifyConversion("2016-05-03T21:12:50Z", Locale.US, "Tuesday, May 3, 2016 9:12:50 PM CEST")
     }
 
-    private fun verifyConversion(date: String, outputFormat: String, expected: String) {
-        assertEquals(expected, converter.changeDateFormat(date, outputFormat))
+    @Test
+    fun shouldConvertToGermanyLocale() {
+        verifyConversion("2016-05-03T21:12:50Z", Locale.GERMANY, "Dienstag, 3. Mai 2016 21:12 Uhr MESZ")
+    }
+
+    private fun verifyConversion(date: String, locale: Locale, expected: String) {
+        assertEquals(expected, converter.changeDateFormat(date, locale))
     }
 }
