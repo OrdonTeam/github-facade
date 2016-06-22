@@ -1,11 +1,14 @@
 package github.repositories.details.controller
 
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.whenever
 import github.repositories.details.GitHubRepositoryDetailsService
+import github.repositories.details.newGitHubRepositoryDetails
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
@@ -27,6 +30,8 @@ class GitHubRepositoryDetailsControllerTest {
 
     @Autowired
     private lateinit var webApplicationContext: WebApplicationContext
+    @Autowired
+    private lateinit var service: GitHubRepositoryDetailsService
     private lateinit var mockMvc: MockMvc
 
     @Before
@@ -36,7 +41,9 @@ class GitHubRepositoryDetailsControllerTest {
 
     @Test
     fun shouldRunEndpoint() {
-        mockMvc.perform(get("/repositories")).andExpect(status().isOk)
+        whenever(service.getRepositoryDetails(any(), any(), any())).thenReturn(newGitHubRepositoryDetails())
+        mockMvc.perform(get("/repositories/OrdonTeam/ogame-api")).andExpect(status().isOk)
+        verify(service).getRepositoryDetails("OrdonTeam", "ogame-api", "")
     }
 
     @Configuration
