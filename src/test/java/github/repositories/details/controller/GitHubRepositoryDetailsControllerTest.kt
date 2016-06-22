@@ -1,13 +1,14 @@
 package github.repositories.details.controller
 
 import com.google.gson.Gson
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockito_kotlin.*
 import github.repositories.details.GitHubRepositoryDetailsService
 import github.repositories.details.newGitHubRepositoryDetails
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.Bean
@@ -21,7 +22,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
-import java.util.*
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @WebAppConfiguration
@@ -41,9 +41,20 @@ class GitHubRepositoryDetailsControllerTest {
 
     @Test
     fun shouldReturnJson() {
-        whenever(service.getRepositoryDetails("OrdonTeam", "ogame-api", Locale.US)).thenReturn(newGitHubRepositoryDetails())
-        mockMvc.perform(get("/repositories/OrdonTeam/ogame-api"))
+        whenever(service.getRepositoryDetails(any(), any(), any())).thenReturn(newGitHubRepositoryDetails())
+        mockMvc.perform(get("/repositories/owner/repositoryName"))
                 .andExpect(content().json(Gson().toJson(newGitHubRepositoryDetails())))
+    }
+
+    @Test
+    fun shouldReceivePathVariable() {
+        mockMvc.perform(get("/repositories/owner/repositoryName"))
+        verify(service).getRepositoryDetails(eq("owner"), eq("repositoryName"), any())
+    }
+
+    @After
+    fun tearDown() {
+        Mockito.reset(service)
     }
 
     @EnableAutoConfiguration
