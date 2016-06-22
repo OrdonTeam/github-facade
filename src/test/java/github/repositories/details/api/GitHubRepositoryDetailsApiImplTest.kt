@@ -1,17 +1,39 @@
 package github.repositories.details.api
 
+import com.github.tomakehurst.wiremock.client.WireMock.*
+import com.github.tomakehurst.wiremock.junit.WireMockRule
 import github.repositories.details.newGitHubRepositoryDetails
 import org.junit.Assert.assertEquals
 import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
+import java.io.File
+import java.lang.Thread.currentThread
 
 class GitHubRepositoryDetailsApiImplTest {
 
-    val api = GitHubRepositoryDetailsApiImpl()
+    @Rule @JvmField
+    val rule = WireMockRule(8080)
+
+    @Test
+    fun shouldParseApiResponse() {
+        rule.returnResponseFromFile("github-repository-details.json")
+        val baseGitHubApiUrl = "http://127.0.0.1:8080"
+        assertEquals(newGitHubRepositoryDetails(), GitHubRepositoryDetailsApiImpl(baseGitHubApiUrl).getRepositoryDetails("OrdonTeam", "ogame-api"))
+    }
 
     @Test
     @Ignore("contract")
     fun testGitHubContract() {
-        assertEquals(newGitHubRepositoryDetails(), api.getRepositoryDetails("OrdonTeam", "ogame-api"))
+        val baseGitHubApiUrl = "https://api.github.com"
+        assertEquals(newGitHubRepositoryDetails(), GitHubRepositoryDetailsApiImpl(baseGitHubApiUrl).getRepositoryDetails("OrdonTeam", "ogame-api"))
+    }
+
+    fun WireMockRule.returnResponseFromFile(fileName: String) {
+        val body = File(currentThread().contextClassLoader.getResource(fileName).toURI()).readBytes()
+        stubFor(get(urlMatching(".*"))
+                .willReturn(aResponse()
+                        .withHeader("Content-type", "application/json")
+                        .withBody(body)))
     }
 }
