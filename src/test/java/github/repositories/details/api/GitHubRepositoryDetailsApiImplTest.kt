@@ -13,12 +13,12 @@ import java.lang.Thread.currentThread
 class GitHubRepositoryDetailsApiImplTest {
 
     @Rule @JvmField
-    val rule = WireMockRule(8080)
+    val rule = WireMockRule(39517)
 
     @Test
     fun shouldParseApiResponse() {
         rule.returnResponseFromFile("github-repository-details.json")
-        val baseGitHubApiUrl = "http://127.0.0.1:8080"
+        val baseGitHubApiUrl = "http://127.0.0.1:39517"
         assertEquals(newGitHubRepositoryDetails(), GitHubRepositoryDetailsApiImpl(baseGitHubApiUrl).getRepositoryDetails("OrdonTeam", "ogame-api"))
     }
 
