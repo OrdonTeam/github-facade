@@ -1,6 +1,6 @@
 package github.repositories.details
 
-import java.util.*
+import java.util.Locale
 
 class GitHubRepositoryDetailsServiceImpl(val api: GitHubRepositoryDetailsApi, val converter: DateFormatConverter) : GitHubRepositoryDetailsService {
 

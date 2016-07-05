@@ -6,7 +6,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import github.repositories.details.GitHubRepositoryDetailsService
 import org.junit.Test
-import java.util.*
+import java.util.Locale
 
 class GitHubRepositoryDetailsController_Locale_Test {
 

@@ -1,6 +1,8 @@
 package github.repositories.details.api
 
-import com.github.tomakehurst.wiremock.client.WireMock.*
+import com.github.tomakehurst.wiremock.client.WireMock.aResponse
+import com.github.tomakehurst.wiremock.client.WireMock.get
+import com.github.tomakehurst.wiremock.client.WireMock.urlMatching
 import com.github.tomakehurst.wiremock.junit.WireMockRule
 import github.repositories.details.newGitHubRepositoryDetails
 import org.junit.Assert.assertEquals

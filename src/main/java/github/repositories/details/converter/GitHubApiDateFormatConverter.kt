@@ -4,7 +4,7 @@ import github.repositories.details.DateFormatConverter
 import org.apache.commons.lang3.time.FastDateFormat
 import java.text.DateFormat.FULL
 import java.text.DateFormat.getDateTimeInstance
-import java.util.*
+import java.util.Locale
 
 class GitHubApiDateFormatConverter : DateFormatConverter {
 

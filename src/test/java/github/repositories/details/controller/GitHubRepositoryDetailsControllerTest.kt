@@ -1,7 +1,11 @@
 package github.repositories.details.controller
 
 import com.google.gson.Gson
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.whenever
 import github.repositories.details.GitHubRepositoryDetailsService
 import github.repositories.details.newGitHubRepositoryDetails
 import org.junit.After

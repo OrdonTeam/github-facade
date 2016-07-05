@@ -2,7 +2,7 @@ package github.repositories.details.converter
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.util.*
+import java.util.Locale
 
 class GitHubApiDateFormatConverterTest {
 
