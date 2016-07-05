@@ -16,7 +16,7 @@ class GitHubRepositoryDetailsApiImpl(val baseGitHubApiUrl: String) : GitHubRepos
         return restTemplate.getForObject(repositoryDetailsUrl, GitHubRepositoryDetailsFromApi::class.java, owner, repositoryName).toGitHubRepositoryDetails()
     }
 
-    fun GitHubRepositoryDetailsFromApi.toGitHubRepositoryDetails(): GitHubRepositoryDetails {
+    private fun GitHubRepositoryDetailsFromApi.toGitHubRepositoryDetails(): GitHubRepositoryDetails {
         return GitHubRepositoryDetails(fullName, description, cloneUrl, stargazersCount, createdAt)
     }
 
